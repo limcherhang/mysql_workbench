@@ -1,0 +1,43 @@
+table {
+    border-collapse: collapse; /* 合并边框，使单元格之间没有间隙 */
+    table-layout: fixed;
+    max-width: 800px;
+}
+
+th, td {
+    border: 1px solid #ccc; /* 为每个单元格添加 1px 的边框，可以根据需要调整边框宽度和颜色 */
+    padding: 8px; /* 设置单元格的内边距 */
+    text-align: center; /* 居中显示单元格内容 */
+    width: 100px;
+}
+
+th {
+    background-color: #f2f2f2; /* 设置表头背景颜色 */
+}
+
+td{
+    background-color: aliceblue;
+}
+
+.text :hover{
+    border: 1px solid
+}
+
+body{
+    background-color: rgb(141, 141, 248);
+}
+
+.databases{
+    float: right; margin-right: 20px;
+}
+
+
+.query-form textarea {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#submit:hover{
+    background-color: aqua;
+}
+

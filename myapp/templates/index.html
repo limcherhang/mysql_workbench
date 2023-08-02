@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My MySQL Workbench</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>MySQL Workbench</h1>
+
+    <!-- <div class="query-history" style="display: block; float: right; margin-right: 20px;">
+        <details>
+            <summary>History</summary>
+            <ul id="queryHistory">
+                {% for query in history %}
+                    <li><a href="/history/">{{ query }}</a></li>
+                {% endfor %}
+            </ul>
+        </details>
+    </div> -->
+
+    <span class="databases">
+        {% if databases_with_tables %}
+            <h3>Databases:</h3>
+            <ul>
+                {% for db, tables in databases_with_tables.items %}
+                    <li>
+                        <details>
+                            <summary>{{ db }}</summary>
+                            {% if tables %}
+                                <ul>
+                                    {% for tb in tables %}
+                                        <li>{{ tb }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </details>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </span>
+
+    <form method="post" class="query-form" id="queryForm">
+        {% csrf_token %}
+        <textarea name="query" cols="100" rows="10" placeholder="Enter your query, Note: It's only allow SELECT, INSERT and DELETE" class="text" id="query"></textarea>
+        <br/>
+        <input type="submit" value="Submit" id="submit">
+    </form>
+
+    {% if query %}
+        
+        <h2>Executing Query:</h2>
+        <pre>{{ query }}</pre>
+    {% endif %}
+
+    {% if result %}
+        <h2>Result:</h2>
+        <table>
+            <tr>
+                {% for col in result.0.keys %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+            </tr>
+            {% for item in result %}
+                <tr>
+                    {% for value in item.values %}
+                        <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    
+    
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
+</body>
+</html>
